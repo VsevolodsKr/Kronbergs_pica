@@ -76,5 +76,33 @@ public class Main extends JFrame{
 			}
 			}
 		});
+		logIn.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+			String vards = loginLogs.getText();
+			String parole = new String(paroleLogs.getPassword());
+			try{
+				File fails = new File("lietotaji.txt");
+				if(fails.exists()){
+					FileReader fr = new FileReader(fails);
+					BufferedReader br = new BufferedReader(fr);
+					String teksts;
+					boolean atrasts = false;
+					while((teksts = br.readLine())!=null){
+						String[] dala = teksts.split(" ");
+						if(dala[0].equals(vards) && dala[1].equals(parole)){
+							JOptionPane.showMessageDialog(null,"Jūs veiksmīgi ienākat savā kontā!","Informacija",JOptionPane.INFORMATION_MESSAGE);
+							br.close();
+							atrasts = true;
+							jf.setVisible(false);
+							//Main menu
+							return;
+						}
+					}
+				}
+			}catch(Exception ex){
+				JOptionPane.showMessageDialog(null,"Problēmas ar lietotāju nolasīšanu!","Kļūda!",JOptionPane.ERROR_MESSAGE);
+			}
+			}
+		});
 	}
 }
