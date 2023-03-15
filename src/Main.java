@@ -1,6 +1,13 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class Main {
@@ -27,5 +34,34 @@ public class Main {
 		jf.setSize(400,400);
 		jf.setLayout(null);
 		jf.setVisible(true);
+		signUp.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+			String vards = loginLogs.getText();
+			String parole = new String(paroleLogs.getText());
+			if(vards.equals("") || parole.equals("")){
+				JOptionPane.showMessageDialog(null,"Ievadi gan lietotājvārdu, gan paroli lodziņās","Bridinājums",JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			try{
+				File fails = new File("lietotaji.txt");
+				if(fails.exists()){
+					FileReader fr = new FileReader(fails);
+					BufferedReader br = new BufferedReader(fr);
+					String teksts;
+					while((teksts = br.readLine())!=null){
+						String[] dala = teksts.split(" ");
+					if(dala[0] == vards){
+						JOptionPane.showMessageDialog(null, "Ievadītais vārds jau eksistē!");
+						br.close();
+						return;
+					}
+					}
+					br.close();
+				}
+			}catch(Exception ex){
+				JOptionPane.showMessageDialog(null,"Problēmas ar failu lietotaji.txt nolasīšanu");
+			}
+			}
+		});
 	}
 }
