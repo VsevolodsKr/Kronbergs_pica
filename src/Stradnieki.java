@@ -1,4 +1,4 @@
 
-public class Stradnieki {
+public class Stradnieki extends Cilveki {
 
 }

@@ -1,4 +1,4 @@
 
-public class Klienti {
+public class Klienti extends Cilveki{
 
 }
