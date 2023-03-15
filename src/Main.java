@@ -90,7 +90,8 @@ public class Main extends JFrame{
 					while((teksts = br.readLine())!=null){
 						String[] dala = teksts.split(" ");
 						if(dala[0].equals(vards) && dala[1].equals(parole)){
-							JOptionPane.showMessageDialog(null,"Jūs veiksmīgi ienākat savā kontā!","Informacija",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,"Jūs veiksmīgi ienākat savā kontā!",
+							"Informacija",JOptionPane.INFORMATION_MESSAGE);
 							br.close();
 							atrasts = true;
 							jf.setVisible(false);
@@ -98,9 +99,16 @@ public class Main extends JFrame{
 							return;
 						}
 					}
+					br.close();
+					if(atrasts == false)
+						JOptionPane.showMessageDialog(null,"Pārbaudiet ievadīto lietotājvārdu un paroli!","Bridinājums",JOptionPane.WARNING_MESSAGE);				
+				}else{
+					JOptionPane.showMessageDialog(null,"Mums vēl nav lietotājus!","Kļūda!",JOptionPane.ERROR_MESSAGE);
+					return;
 				}
 			}catch(Exception ex){
-				JOptionPane.showMessageDialog(null,"Problēmas ar lietotāju nolasīšanu!","Kļūda!",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Problēmas ar lietotāju nolasīšanu!",
+				"Kļūda!",JOptionPane.ERROR_MESSAGE);
 			}
 			}
 		});
