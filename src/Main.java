@@ -1,21 +1,24 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Main {
+public class Main extends JFrame{
 	public static void main(String[] args) {
 		JFrame jf = new JFrame("Reģistrācijas logs");
 		JTextField loginLogs = new JTextField();
 		JLabel loginVards = new JLabel("Lietotājvārds:");
-		JTextField paroleLogs = new JTextField();
+		JPasswordField paroleLogs = new JPasswordField();
 		JLabel paroleVards = new JLabel("Parole:");
 		JButton logIn = new JButton("Ieiet");
 		JButton signUp = new JButton("Pieslēgties");
@@ -37,7 +40,7 @@ public class Main {
 		signUp.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 			String vards = loginLogs.getText();
-			String parole = new String(paroleLogs.getText());
+			String parole = new String(paroleLogs.getPassword());
 			if(vards.equals("") || parole.equals("")){
 				JOptionPane.showMessageDialog(null,"Ievadi gan lietotājvārdu, gan paroli lodziņās","Bridinājums",JOptionPane.WARNING_MESSAGE);
 				return;
@@ -50,7 +53,7 @@ public class Main {
 					String teksts;
 					while((teksts = br.readLine())!=null){
 						String[] dala = teksts.split(" ");
-					if(dala[0] == vards){
+					if(dala[0].equals(vards)){
 						JOptionPane.showMessageDialog(null, "Ievadītais vārds jau eksistē!");
 						br.close();
 						return;
@@ -59,7 +62,17 @@ public class Main {
 					br.close();
 				}
 			}catch(Exception ex){
-				JOptionPane.showMessageDialog(null,"Problēmas ar failu lietotaji.txt nolasīšanu");
+				JOptionPane.showMessageDialog(null,"Problēmas ar failu lietotaji.txt nolasīšanu","Kļūda",JOptionPane.ERROR_MESSAGE);
+			}
+			try{
+				FileWriter fw = new FileWriter(new File("lietotaji.txt"),true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(vards+" "+parole);
+				bw.newLine();
+				bw.close();
+				JOptionPane.showMessageDialog(null,"Lietotājs veiksmīgi pievienots sistēmai!","Informācija",JOptionPane.INFORMATION_MESSAGE);
+			}catch(Exception ex){
+				JOptionPane.showMessageDialog(null,"Problēmas ar failu lietotaji.txt vārdu un paroli pievienošanu!","Kļūda!",JOptionPane.ERROR_MESSAGE);
 			}
 			}
 		});
