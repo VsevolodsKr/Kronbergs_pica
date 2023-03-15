@@ -5,15 +5,66 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class Main extends JFrame{
+	static void Picerija(String vards){
+		ArrayList<Pica> picasSaraksts = new ArrayList<Pica>();
+		String[] nosaukumi = {"Margarita","Pepperoni","Studenta","Četri gadalaiki","Diavola","Ferrara","Vezuva"};
+		JFrame jf = new JFrame("Kronberga picerija");
+		JComboBox nosaukumaKastite = new JComboBox<String>(nosaukumi);
+		JRadioButton izmers1 = new JRadioButton("Maza(20 cm)");
+		JRadioButton izmers2 = new JRadioButton("Vidēja(30 cm)");
+		JRadioButton izmers3 = new JRadioButton("Liela(50 cm)");
+		JRadioButton piepild0 = new JRadioButton("Bez");
+		JCheckBox piepild1 = new JCheckBox("Pepperoni desa");
+		JCheckBox piepild2 = new JCheckBox("Tomāti");
+		JCheckBox piepild3 = new JCheckBox("Sēnes");
+		JCheckBox piepild4 = new JCheckBox("Sīpoli");
+		JCheckBox piepild5 = new JCheckBox("Paprika");
+		JCheckBox piepild6 = new JCheckBox("Marinēti gurķi");
+		JCheckBox piepild7 = new JCheckBox("Vistas gaļa");
+		JCheckBox piepild8 = new JCheckBox("Čīli pipāri");
+		JLabel picasNosaukums = new JLabel("Picas veids:");
+		JLabel picasPiedavajumi = new JLabel("Piedāvājumi:");
+		nosaukumaKastite.setBounds(100,50,100,20);
+		picasNosaukums.setBounds(20,50,90,20);
+		picasPiedavajumi.setBounds(20,100,90,20);
+		piepild0.setBounds(30,130,130,20);
+		piepild1.setBounds(30,150,130,20);
+		piepild2.setBounds(30,170,130,20);
+		piepild3.setBounds(30,190,130,20);
+		piepild4.setBounds(30,210,130,20);
+		piepild5.setBounds(30,230,130,20);
+		piepild6.setBounds(30,250,130,20);
+		piepild7.setBounds(30,270,130,20);
+		piepild8.setBounds(30,290,130,20);
+		jf.add(picasNosaukums);
+		jf.add(nosaukumaKastite);
+		jf.add(picasPiedavajumi);
+		jf.add(piepild0);
+		jf.add(piepild1);
+		jf.add(piepild2);
+		jf.add(piepild3);
+		jf.add(piepild4);
+		jf.add(piepild5);
+		jf.add(piepild6);
+		jf.add(piepild7);
+		jf.add(piepild8);
+		jf.setLayout(null);
+		jf.setSize(500,500);
+		jf.setVisible(true);
+	}
 	public static void main(String[] args) {
 		JFrame jf = new JFrame("Reģistrācijas logs");
 		JTextField loginLogs = new JTextField();
@@ -95,20 +146,20 @@ public class Main extends JFrame{
 							br.close();
 							atrasts = true;
 							jf.setVisible(false);
-							//Main menu
+							Picerija(vards);
 							return;
 						}
 					}
 					br.close();
 					if(atrasts == false)
-						JOptionPane.showMessageDialog(null,"Pārbaudiet ievadīto lietotājvārdu un paroli!","Bridinājums",JOptionPane.WARNING_MESSAGE);				
+						JOptionPane.showMessageDialog(null,"Pārbaudiet ievadīto lietotājvārdu un paroli!",
+						"Bridinājums",JOptionPane.WARNING_MESSAGE);				
 				}else{
 					JOptionPane.showMessageDialog(null,"Mums vēl nav lietotājus!","Kļūda!",JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 			}catch(Exception ex){
-				JOptionPane.showMessageDialog(null,"Problēmas ar lietotāju nolasīšanu!",
-				"Kļūda!",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Problēmas ar lietotāju nolasīšanu!","Kļūda!",JOptionPane.ERROR_MESSAGE);
 			}
 			}
 		});
