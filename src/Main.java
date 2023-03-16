@@ -19,6 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class Main extends JFrame{
+	public static double tagad = 0;
 	static void Picerija(String vards){
 		ArrayList<Pica> picasSaraksts = new ArrayList<Pica>();
 		String[] nosaukumi = {"Margarita(4.80 Eur)","Pepperoni(5.99 Eur)","Studenta(5.59 Eur)","Četri gadalaiki(5.09 Eur)","Diavola(6.19 Eur)","Ferrara(6.99 Eur)","Vezuva(5.69 Eur)"};
@@ -202,7 +203,92 @@ public class Main extends JFrame{
 			   }
 			}
 		});
-		
+		count.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				double summa=0;
+			if(nosaukumaKastite.getSelectedItem().equals("Margarita(4.80 Eur)"))
+				summa += 4.80;
+			else if(nosaukumaKastite.getSelectedItem().equals("Pepperoni"))
+				summa += 5.99;
+			else if(nosaukumaKastite.getSelectedItem().equals("Studenta"))
+				summa += 5.59;
+			else if(nosaukumaKastite.getSelectedItem().equals("Četri gadaliki"))
+				summa += 5.09;
+			else if(nosaukumaKastite.getSelectedItem().equals("Diavola"))
+				summa += 6.19;
+			else if(nosaukumaKastite.getSelectedItem().equals("Ferrara"))
+				summa += 6.99;
+			else
+				summa += 5.69;
+			if(piepild0.isSelected())
+				summa += 0;
+			else{
+				if(piepild1.isSelected())
+		            summa += 0.79;
+		          if(piepild2.isSelected())
+		            summa += 0.59;
+		          if(piepild3.isSelected())
+		            summa += 0.80;
+		          if(piepild4.isSelected())
+		            summa += 0.65;
+		          if(piepild5.isSelected())
+		            summa += 0.55;
+		          if(piepild6.isSelected())
+		            summa += 0.69;
+		          if(piepild7.isSelected())
+		            summa += 0.99;
+		          else
+		            summa += 0.89;
+			}
+			if(izmers1.isSelected())
+				summa += 0;
+			else if(izmers2.isSelected())
+				summa += 3;
+			else
+				summa += 5;
+			if(irKarte.isSelected())
+				summa = (summa * 80)/100;
+			else
+				summa += 0;
+			if(piegade.isSelected())
+				summa += 2.99;
+			else
+				summa += 0;
+			cena.setText(String.valueOf(summa));
+			tagad = Double.parseDouble(cena.getText());
+			}
+		});
+		clear.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				nosaukumaKastite.setSelectedItem("Margarita(4.80 Eur)");
+				piepild0.setSelected(false);
+				piepild1.setSelected(false);
+				piepild2.setSelected(false);
+				piepild3.setSelected(false);
+				piepild4.setSelected(false);
+				piepild5.setSelected(false);
+				piepild6.setSelected(false);
+				piepild7.setSelected(false);
+				piepild8.setSelected(false);
+				piepild1.setEnabled(true);
+				piepild2.setEnabled(true);
+				piepild3.setEnabled(true);
+				piepild4.setEnabled(true);
+				piepild5.setEnabled(true);
+				piepild6.setEnabled(true);
+				piepild7.setEnabled(true);
+				piepild8.setEnabled(true);
+				izmeri.clearSelection();
+				karte.clearSelection();
+				ievadaKarti.setVisible(false);
+		        adrese.setVisible(false);
+		        telefons.setVisible(false);
+		        adreseVards.setVisible(false);
+		        telefonsVards.setVisible(false);
+		        esana.clearSelection();
+		        cena.setText("");
+			}
+		});
 	}
 	public static void main(String[] args) {
 		JFrame jf = new JFrame("Reģistrācijas logs");
