@@ -17,10 +17,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
+import java.text.DecimalFormat;
 public class Main extends JFrame{
 	public static double tagad = 0;
 	static void Picerija(String vards){
+		DecimalFormat df = new DecimalFormat("#.##");
 		ArrayList<Pica> picasSaraksts = new ArrayList<Pica>();
 		String[] nosaukumi = {"Margarita(4.80 Eur)","Pepperoni(5.99 Eur)","Studenta(5.59 Eur)","Četri gadalaiki(5.09 Eur)","Diavola(6.19 Eur)","Ferrara(6.99 Eur)","Vezuva(5.69 Eur)"};
 		JFrame jf = new JFrame("Kronberga picerija");
@@ -287,6 +288,12 @@ public class Main extends JFrame{
 		        telefonsVards.setVisible(false);
 		        esana.clearSelection();
 		        cena.setText("");
+			}
+		});
+		add.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				double rez = Double.parseDouble(cena.getText()) + tagad;
+				cena.setText(String.valueOf(df.format(rez)));
 			}
 		});
 	}
