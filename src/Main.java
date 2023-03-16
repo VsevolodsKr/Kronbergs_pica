@@ -59,6 +59,11 @@ public class Main extends JFrame{
 	    ButtonGroup karte = new ButtonGroup();
 	    karte.add(irKarte);
 	    karte.add(navKartes);
+	    ButtonGroup izmeri = new ButtonGroup();
+	    izmeri.add(izmers1);
+	    izmeri.add(izmers2);
+	    izmeri.add(izmers3);
+	    karte.add(navKartes);
 	    ButtonGroup esana = new ButtonGroup();
 	    esana.add(uz_vietas);
 	    esana.add(piegade);
@@ -78,6 +83,8 @@ public class Main extends JFrame{
 		izmers1.setBounds(30,370,130,20);
 		izmers2.setBounds(30,390,130,20);
 		izmers3.setBounds(30,410,130,20);
+		klientaKarte.setBounds(300, 90, 100, 20);
+	    piegadesVariants.setBounds(300, 200, 150, 20);
 		irKarte.setBounds(270, 120, 100, 20);
 	    navKartes.setBounds(370, 120, 100, 20);
 	    uz_vietas.setBounds(260, 230, 100, 20);
@@ -135,6 +142,67 @@ public class Main extends JFrame{
 		jf.setLayout(null);
 		jf.setSize(500,500);
 		jf.setVisible(true);
+		piepild0.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if (piepild0.isSelected()) {
+			          piepild1.setEnabled(false);
+			          piepild2.setEnabled(false);
+			          piepild3.setEnabled(false);
+			          piepild4.setEnabled(false);
+			          piepild5.setEnabled(false);
+			          piepild6.setEnabled(false);
+			          piepild7.setEnabled(false);
+			          piepild8.setEnabled(false);
+			        } else {
+			          piepild1.setEnabled(true);
+			          piepild2.setEnabled(true);
+			          piepild3.setEnabled(true);
+			          piepild4.setEnabled(true);
+			          piepild5.setEnabled(true);
+			          piepild6.setEnabled(true);
+			          piepild7.setEnabled(true);
+			          piepild8.setEnabled(true);
+			        }
+			}
+		});
+		irKarte.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(irKarte.isSelected()){
+			          ievadaKarti.setText("");
+			          ievadaKarti.setVisible(true);
+			   }
+			}
+		});
+		navKartes.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(navKartes.isSelected()){
+			          ievadaKarti.setVisible(false);
+			   }
+			}
+		});
+		uz_vietas.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(uz_vietas.isSelected()){
+			          adrese.setVisible(false);
+			          telefons.setVisible(false);
+			          adreseVards.setVisible(false);
+			          telefonsVards.setVisible(false);
+			   }
+			}
+		});
+		piegade.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(piegade.isSelected()){
+			          adrese.setText("");
+			          telefons.setText("+371");
+			          adrese.setVisible(true);
+			          telefons.setVisible(true);
+			          adreseVards.setVisible(true);
+			          telefonsVards.setVisible(true);
+			   }
+			}
+		});
+		
 	}
 	public static void main(String[] args) {
 		JFrame jf = new JFrame("Reģistrācijas logs");
