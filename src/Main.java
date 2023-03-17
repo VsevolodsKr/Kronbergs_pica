@@ -20,9 +20,9 @@ import javax.swing.JTextField;
 import java.text.DecimalFormat;
 public class Main extends JFrame{
 	public static double tagad = 0;
+	public static ArrayList<Object> picasSaraksts = new ArrayList<Object>();
+	public static String[] piedavajumi;
 	static void Picerija(String vards){
-		DecimalFormat df = new DecimalFormat("#.##");
-		ArrayList<Pica> picasSaraksts = new ArrayList<Pica>();
 		String[] nosaukumi = {"Margarita(4.80 Eur)","Pepperoni(5.99 Eur)","Studenta(5.59 Eur)","Četri gadalaiki(5.09 Eur)","Diavola(6.19 Eur)","Ferrara(6.99 Eur)","Vezuva(5.69 Eur)"};
 		JFrame jf = new JFrame("Kronberga picerija");
 		 JButton clear = new JButton("Notīrīt");
@@ -209,15 +209,15 @@ public class Main extends JFrame{
 				double summa=0;
 			if(nosaukumaKastite.getSelectedItem().equals("Margarita(4.80 Eur)"))
 				summa += 4.80;
-			else if(nosaukumaKastite.getSelectedItem().equals("Pepperoni"))
+			else if(nosaukumaKastite.getSelectedItem().equals("Pepperoni(5.99 Eur)"))
 				summa += 5.99;
-			else if(nosaukumaKastite.getSelectedItem().equals("Studenta"))
+			else if(nosaukumaKastite.getSelectedItem().equals("Studenta(5.59 Eur)"))
 				summa += 5.59;
-			else if(nosaukumaKastite.getSelectedItem().equals("Četri gadaliki"))
+			else if(nosaukumaKastite.getSelectedItem().equals("Četri gadalaiki(5.09 Eur)"))
 				summa += 5.09;
-			else if(nosaukumaKastite.getSelectedItem().equals("Diavola"))
+			else if(nosaukumaKastite.getSelectedItem().equals("Diavola(6.19 Eur)"))
 				summa += 6.19;
-			else if(nosaukumaKastite.getSelectedItem().equals("Ferrara"))
+			else if(nosaukumaKastite.getSelectedItem().equals("Ferrara(6.99 Eur)"))
 				summa += 6.99;
 			else
 				summa += 5.69;
@@ -255,7 +255,7 @@ public class Main extends JFrame{
 				summa += 2.99;
 			else
 				summa += 0;
-			cena.setText(String.valueOf(summa));
+			cena.setText(String.valueOf(Math.round(summa*100.0)/100.0));
 			tagad = Double.parseDouble(cena.getText());
 			}
 		});
@@ -288,12 +288,50 @@ public class Main extends JFrame{
 		        telefonsVards.setVisible(false);
 		        esana.clearSelection();
 		        cena.setText("");
+		        picasSaraksts.clear();
 			}
 		});
 		add.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				double rez = Double.parseDouble(cena.getText()) + tagad;
-				cena.setText(String.valueOf(df.format(rez)));
+				cena.setText(String.valueOf(rez));
+				String nosaukums,karte,adress,telefons2;
+				ArrayList<Object> piedavajumi = new ArrayList<Object>();
+					if(piepild1.isSelected())
+			            piedavajumi.add(piepild1);
+			          if(piepild2.isSelected())
+			        	piedavajumi.add(piepild2);
+			          if(piepild3.isSelected())
+			        	piedavajumi.add(piepild3);
+			          if(piepild4.isSelected())
+			        	piedavajumi.add(piepild4);
+			          if(piepild5.isSelected())
+			        	piedavajumi.add(piepild5);
+			          if(piepild6.isSelected())
+			        	piedavajumi.add(piepild6);
+			          if(piepild7.isSelected())
+			        	piedavajumi.add(piepild7);
+			          else
+			        	piedavajumi.add(piepild8);
+			        if(izmers1.isSelected())
+			        	nosaukums = izmers1.getText();
+			        else if(izmers2.isSelected())
+			        	nosaukums = izmers2.getText();
+			        else
+			        	nosaukums = izmers3.getText();
+			        if(irKarte.isSelected())
+			        	karte = ievadaKarti.getText();
+			        else
+			        	karte = "Nav";
+			        if(piegade.isSelected()){
+			        	adress = adrese.getText();
+			        	telefons2 = telefons.getText();
+			        }else{
+			        	adress = "-";
+			        	telefons2 = "-";
+			        }
+			        Pica pica = new Pica(nosaukumaKastite.getSelectedItem(),piedavajumi,nosaukums,karte,adress,telefons2);
+			        Pica.pievienotPicu(pica);
 			}
 		});
 	}
