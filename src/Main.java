@@ -5,7 +5,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -16,13 +19,46 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import java.text.DecimalFormat;
 public class Main{
 	public static double tagad = 0;
 	public static String[] piedavajumi;
+	public static Queue<String> rinda = new LinkedList<String>();
+	private static TimerTask timer = new TimerTask(){
+		public void run() {
+		      String klients = Main.rinda.poll();
+		      if (klients != null)
+		        JOptionPane.showMessageDialog(null,
+		            "Klients " + klients + " saņema savu picu!\nRindas garums: " + Main.rinda.size() + "cilvēki.",
+		            "Informācija", JOptionPane.INFORMATION_MESSAGE);
+		      else {
+		        JOptionPane.showMessageDialog(null, "Rinda ir tukša", "Informācija", JOptionPane.INFORMATION_MESSAGE);
+		        cancel();
+		      }
+		    }
+	};
 	static void pasutijumaLogs(String vards){
-		
+		JButton cancel = new JButton("Atgriezties");
+	    JButton view = new JButton("Apskatīt");
+	    JButton order = new JButton("Pasūtīt");
+	    JFrame jf = new JFrame("Pasūtījuma informācija");
+	    JScrollPane js1 = new JScrollPane(new JTextArea(Pica.nolasit()));
+	    JScrollPane js2 = new JScrollPane(new JTextArea(Piegade.nolasitPiegadi()));
+	    js1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	    js2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	    Timer t = new Timer();
+	    t.schedule(timer,0,60000);
+	    cancel.setBounds(50, 75, 120, 25);
+	    view.setBounds(180, 75, 120, 25);
+	    order.setBounds(310, 75, 120, 25);
+	    jf.add(cancel);
+	    jf.add(view);
+	    jf.add(order);
+	    jf.setSize(500, 150);
+	    jf.setLayout(null);
+	    jf.setVisible(true);
 	}
 	static void Picerija(String vards){
 		String[] nosaukumi = {"Margarita(4.80 Eur)","Pepperoni(5.99 Eur)","Studenta(5.59 Eur)","Četri gadalaiki(5.09 Eur)","Diavola(6.19 Eur)","Ferrara(6.99 Eur)","Vezuva(5.69 Eur)"};
@@ -310,7 +346,8 @@ public class Main{
 		});
 		order.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(uz_vietas.isSelected() || telefons.getText().equals("+371")||adrese.getText().equals("")){
+				if(uz_vietas.isSelected() || telefons.getText().equals("+371")||
+					adrese.getText().equals("")){
 					Pica pica = new Pica(String.valueOf(nosaukumaKastite.getSelectedItem()),(izmers1.isSelected())?izmers1.getText():(izmers2.isSelected())?izmers2.getText():izmers3.getText(),(irKarte.isSelected() && !ievadaKarti.getText().equals(""))?ievadaKarti.getText():"-",(piepild1.isSelected())?true:false,(piepild2.isSelected())?true:false,(piepild3.isSelected())?true:false,(piepild4.isSelected())?true:false,(piepild5.isSelected())?true:false,(piepild6.isSelected())?true:false,(piepild7.isSelected())?true:false,(piepild8.isSelected())?true:false,Double.parseDouble(cena.getText()));
 					Pica.pievienot(pica);
 				}
