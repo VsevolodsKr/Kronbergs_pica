@@ -3,29 +3,22 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Pica {
-	private String izmers,kods,adrese,telefons;
-	private Object nosaukums;
-	private ArrayList<Object> piedavajumi;
+	private String nosaukums,izmers,karte;
+	private boolean irPepperoni,irSenes,irSipoli,irPaprika,irGurki,irPipars,irGala,irTomati;
+	private double cena=0;
 	public static ArrayList<Pica> picasSaraksts = new ArrayList<Pica>();
-	public Pica(Object nosaukums,ArrayList<Object> piedavajumi,String izmers,String kods,String adrese,String telefons){
+	public Pica(String nosaukums, String izmers, String karte, boolean irPepperoni, boolean irSenes, boolean irSipoli, boolean irPaprika, boolean irGurki, boolean irPipars, boolean irGala, boolean irTomati, double cena){
 		this.nosaukums = nosaukums;
-		this.piedavajumi = piedavajumi;
-		this.izmers = izmers;
-		this.kods = kods;
-		this.adrese = adrese;
-		this.telefons = telefons;
-	}
-	public void nolasitInformaciju(){
-		String str="";
-		for(int i=0;i<piedavajumi.size();i++){
-			str += piedavajumi.get(i)+"\n";
-		}
-		JOptionPane.showMessageDialog(null,"Picas nosaukums: "+nosaukums+"\nPicas sastāvdaļas: "+str+"\nPicas izmers: "+izmers+"\nKlienta karte: "+kods+"\nPiegādes adrese: "+adrese+"\nKlienta telefons: "+telefons,"Informācija",JOptionPane.INFORMATION_MESSAGE);
-	}
-	public static void pievienotPicu(Pica a){
-		picasSaraksts.add(a);
-	}
-	public static void izdzestPicu(){
-		picasSaraksts.clear();
+	    this.izmers = izmers;
+	    this.karte = karte;
+	    this.irPepperoni = irPepperoni;
+	    this.irSenes = irSenes;
+	    this.irSipoli = irSipoli;
+	    this.irPaprika = irPaprika;
+	    this.irGurki = irGurki;
+	    this.irPipars = irPipars;
+	    this.irGala = irGala;
+	    this.irTomati = irTomati;
+	    this.cena = cena;
 	}
 }

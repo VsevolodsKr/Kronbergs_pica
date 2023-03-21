@@ -18,7 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import java.text.DecimalFormat;
-public class Main extends JFrame{
+public class Main{
 	public static double tagad = 0;
 	public static ArrayList<Object> picasSaraksts = new ArrayList<Object>();
 	public static String[] piedavajumi;
@@ -330,8 +330,8 @@ public class Main extends JFrame{
 			        	adress = "-";
 			        	telefons2 = "-";
 			        }
-			        Pica pica = new Pica(nosaukumaKastite.getSelectedItem(),piedavajumi,nosaukums,karte,adress,telefons2);
-			        Pica.pievienotPicu(pica);
+//			        Pica pica = new Pica(nosaukumaKastite.getSelectedItem(),piedavajumi,nosaukums,karte,adress,telefons2);
+//			        Pica.pievienotPicu(pica);
 			}
 		});
 	}
