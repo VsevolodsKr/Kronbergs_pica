@@ -20,8 +20,10 @@ import javax.swing.JTextField;
 import java.text.DecimalFormat;
 public class Main{
 	public static double tagad = 0;
-	public static ArrayList<Object> picasSaraksts = new ArrayList<Object>();
 	public static String[] piedavajumi;
+	static void pasutijumaLogs(String vards){
+		
+	}
 	static void Picerija(String vards){
 		String[] nosaukumi = {"Margarita(4.80 Eur)","Pepperoni(5.99 Eur)","Studenta(5.59 Eur)","Četri gadalaiki(5.09 Eur)","Diavola(6.19 Eur)","Ferrara(6.99 Eur)","Vezuva(5.69 Eur)"};
 		JFrame jf = new JFrame("Kronberga picerija");
@@ -288,50 +290,36 @@ public class Main{
 		        telefonsVards.setVisible(false);
 		        esana.clearSelection();
 		        cena.setText("");
-		        picasSaraksts.clear();
+		        Pica.dzestSarakstu();
+		        Piegade.dzestPiegadesSarakstu();
 			}
 		});
 		add.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				double rez = Double.parseDouble(cena.getText()) + tagad;
 				cena.setText(String.valueOf(rez));
-				String nosaukums,karte,adress,telefons2;
-				ArrayList<Object> piedavajumi = new ArrayList<Object>();
-					if(piepild1.isSelected())
-			            piedavajumi.add(piepild1);
-			          if(piepild2.isSelected())
-			        	piedavajumi.add(piepild2);
-			          if(piepild3.isSelected())
-			        	piedavajumi.add(piepild3);
-			          if(piepild4.isSelected())
-			        	piedavajumi.add(piepild4);
-			          if(piepild5.isSelected())
-			        	piedavajumi.add(piepild5);
-			          if(piepild6.isSelected())
-			        	piedavajumi.add(piepild6);
-			          if(piepild7.isSelected())
-			        	piedavajumi.add(piepild7);
-			          else
-			        	piedavajumi.add(piepild8);
-			        if(izmers1.isSelected())
-			        	nosaukums = izmers1.getText();
-			        else if(izmers2.isSelected())
-			        	nosaukums = izmers2.getText();
-			        else
-			        	nosaukums = izmers3.getText();
-			        if(irKarte.isSelected())
-			        	karte = ievadaKarti.getText();
-			        else
-			        	karte = "Nav";
-			        if(piegade.isSelected()){
-			        	adress = adrese.getText();
-			        	telefons2 = telefons.getText();
-			        }else{
-			        	adress = "-";
-			        	telefons2 = "-";
-			        }
-//			        Pica pica = new Pica(nosaukumaKastite.getSelectedItem(),piedavajumi,nosaukums,karte,adress,telefons2);
-//			        Pica.pievienotPicu(pica);
+				if(uz_vietas.isSelected()){
+					Pica pica = new Pica(String.valueOf(nosaukumaKastite.getSelectedItem()),(izmers1.isSelected())?izmers1.getText():(izmers2.isSelected())?izmers2.getText():izmers3.getText(),(irKarte.isSelected() && !ievadaKarti.getText().equals(""))?ievadaKarti.getText():"-",(piepild1.isSelected())?true:false,(piepild2.isSelected())?true:false,(piepild3.isSelected())?true:false,(piepild4.isSelected())?true:false,(piepild5.isSelected())?true:false,(piepild6.isSelected())?true:false,(piepild7.isSelected())?true:false,(piepild8.isSelected())?true:false,Double.parseDouble(cena.getText()));
+					Pica.pievienot(pica);
+				}
+				if(piegade.isSelected()){
+					Piegade pica = new Piegade(String.valueOf(nosaukumaKastite.getSelectedItem()),(izmers1.isSelected())?izmers1.getText():(izmers2.isSelected())?izmers2.getText():izmers3.getText(),(irKarte.isSelected() && !ievadaKarti.getText().equals(""))?ievadaKarti.getText():"-",(piepild1.isSelected())?true:false,(piepild2.isSelected())?true:false,(piepild3.isSelected())?true:false,(piepild4.isSelected())?true:false,(piepild5.isSelected())?true:false,(piepild6.isSelected())?true:false,(piepild7.isSelected())?true:false,(piepild8.isSelected())?true:false,Double.parseDouble(cena.getText()),adrese.getText(),telefons.getText());
+					Piegade.pievienot(pica);
+				}
+			}
+		});
+		order.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(uz_vietas.isSelected() || telefons.getText().equals("+371")||adrese.getText().equals("")){
+					Pica pica = new Pica(String.valueOf(nosaukumaKastite.getSelectedItem()),(izmers1.isSelected())?izmers1.getText():(izmers2.isSelected())?izmers2.getText():izmers3.getText(),(irKarte.isSelected() && !ievadaKarti.getText().equals(""))?ievadaKarti.getText():"-",(piepild1.isSelected())?true:false,(piepild2.isSelected())?true:false,(piepild3.isSelected())?true:false,(piepild4.isSelected())?true:false,(piepild5.isSelected())?true:false,(piepild6.isSelected())?true:false,(piepild7.isSelected())?true:false,(piepild8.isSelected())?true:false,Double.parseDouble(cena.getText()));
+					Pica.pievienot(pica);
+				}
+				if(piegade.isSelected()){
+					Piegade pica = new Piegade(String.valueOf(nosaukumaKastite.getSelectedItem()),(izmers1.isSelected())?izmers1.getText():(izmers2.isSelected())?izmers2.getText():izmers3.getText(),(irKarte.isSelected() && !ievadaKarti.getText().equals(""))?ievadaKarti.getText():"-",(piepild1.isSelected())?true:false,(piepild2.isSelected())?true:false,(piepild3.isSelected())?true:false,(piepild4.isSelected())?true:false,(piepild5.isSelected())?true:false,(piepild6.isSelected())?true:false,(piepild7.isSelected())?true:false,(piepild8.isSelected())?true:false,Double.parseDouble(cena.getText()),adrese.getText(),telefons.getText());
+					Piegade.pievienot(pica);
+			}
+				jf.setVisible(false);
+				pasutijumaLogs(vards);
 			}
 		});
 	}
