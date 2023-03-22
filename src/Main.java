@@ -26,9 +26,9 @@ public class Main{
 	public static double tagad = 0;
 	public static String[] piedavajumi;
 	public static Queue<String> rinda = new LinkedList<String>();
-	private static TimerTask timer = new TimerTask(){
+	public static TimerTask timer = new TimerTask(){
 		public void run() {
-		      String klients = Main.rinda.poll();
+		      String klients = rinda.poll();
 		      if (klients != null)
 		        JOptionPane.showMessageDialog(null,
 		            "Klients " + klients + " saņema savu picu!\nRindas garums: " + Main.rinda.size() + "cilvēki.",
@@ -39,6 +39,13 @@ public class Main{
 		      }
 		    }
 	};
+	static String timerInfo() {
+	    String str = "";
+//	    for (int i = 0; i < rinda.size(); i++) {
+//	      str += (i+1) + ".klients:\n" + rinda.peek() + "\nLaiks: " + timer.getDelay() / 1000 + " sekundes";
+//	    }
+	    return str;
+	  }
 	static void pasutijumaLogs(String vards){
 		JButton cancel = new JButton("Atgriezties");
 	    JButton view = new JButton("Apskatīt");
@@ -59,6 +66,26 @@ public class Main{
 	    jf.setSize(500, 150);
 	    jf.setLayout(null);
 	    jf.setVisible(true);
+	    cancel.addActionListener(new ActionListener(){
+	    	public void actionPerformed(ActionEvent e){
+	    		jf.dispose();
+	    		Picerija(vards);
+	    		return;
+	    	}
+	    });
+	    view.addActionListener(new ActionListener(){
+	    	public void actionPerformed(ActionEvent e){
+	    		JOptionPane.showMessageDialog(null, js1,"Uz vietas",JOptionPane.PLAIN_MESSAGE);
+	    		JOptionPane.showMessageDialog(null,js2,"Piegāde",JOptionPane.PLAIN_MESSAGE);
+	    		
+	    	}
+	    });
+	    order.addActionListener(new ActionListener(){
+	    	public void actionPerformed(ActionEvent e){
+	    		rinda.add(vards);
+	    		JOptionPane.showMessageDialog(null, timerInfo(), "Rinda", JOptionPane.INFORMATION_MESSAGE);
+	    	}
+	    });
 	}
 	static void Picerija(String vards){
 		String[] nosaukumi = {"Margarita(4.80 Eur)","Pepperoni(5.99 Eur)","Studenta(5.59 Eur)","Četri gadalaiki(5.09 Eur)","Diavola(6.19 Eur)","Ferrara(6.99 Eur)","Vezuva(5.69 Eur)"};
@@ -285,7 +312,7 @@ public class Main{
 				summa += 3;
 			else
 				summa += 5;
-			if(irKarte.isSelected())
+			if(irKarte.isSelected() && !ievadaKarti.getText().equals(""))
 				summa = (summa * 80)/100;
 			else
 				summa += 0;
@@ -346,8 +373,7 @@ public class Main{
 		});
 		order.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(uz_vietas.isSelected() || telefons.getText().equals("+371")||
-					adrese.getText().equals("")){
+				if(uz_vietas.isSelected()){
 					Pica pica = new Pica(String.valueOf(nosaukumaKastite.getSelectedItem()),(izmers1.isSelected())?izmers1.getText():(izmers2.isSelected())?izmers2.getText():izmers3.getText(),(irKarte.isSelected() && !ievadaKarti.getText().equals(""))?ievadaKarti.getText():"-",(piepild1.isSelected())?true:false,(piepild2.isSelected())?true:false,(piepild3.isSelected())?true:false,(piepild4.isSelected())?true:false,(piepild5.isSelected())?true:false,(piepild6.isSelected())?true:false,(piepild7.isSelected())?true:false,(piepild8.isSelected())?true:false,Double.parseDouble(cena.getText()));
 					Pica.pievienot(pica);
 				}
@@ -355,7 +381,8 @@ public class Main{
 					Piegade pica = new Piegade(String.valueOf(nosaukumaKastite.getSelectedItem()),(izmers1.isSelected())?izmers1.getText():(izmers2.isSelected())?izmers2.getText():izmers3.getText(),(irKarte.isSelected() && !ievadaKarti.getText().equals(""))?ievadaKarti.getText():"-",(piepild1.isSelected())?true:false,(piepild2.isSelected())?true:false,(piepild3.isSelected())?true:false,(piepild4.isSelected())?true:false,(piepild5.isSelected())?true:false,(piepild6.isSelected())?true:false,(piepild7.isSelected())?true:false,(piepild8.isSelected())?true:false,Double.parseDouble(cena.getText()),adrese.getText(),telefons.getText());
 					Piegade.pievienot(pica);
 			}
-				jf.setVisible(false);
+	
+			jf.setVisible(false);
 				pasutijumaLogs(vards);
 			}
 		});
