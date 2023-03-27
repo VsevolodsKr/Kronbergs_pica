@@ -4,6 +4,6 @@ Es izveidoju repozitoriju, kurā iekšā ir *Java* programma ar **manu picerijas
 ## Darba saraksts :notebook::
 - [x] Ir izveidota repozitorija ar nosaukumu Kronbergs_pica
 - [x] Ir izveidots README fails ar Markdown formatēšanu un bildes pielikšānu
-- [ ] Projekts ir pielikts un darba uzsākšana
+- [x] Projekts ir pielikts un darba uzsākšana
 - [ ] Programmas papildināšana un kļūdu labojums
 - [ ] Darba pabeigšana
