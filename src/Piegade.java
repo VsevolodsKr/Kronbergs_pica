@@ -45,4 +45,12 @@ public class Piegade extends Pica{
 		    }
 		return str;
 	}
+	public static double aprekinaCenu(){
+		double rez=0;
+		for(int i=0;i<piegadesPicasSaraksts.size();i++){
+			rez += piegadesPicasSaraksts.get(i).getCena();
+		}
+		rez = aprekinaCenu2(rez);
+		return rez;
+	}
 }

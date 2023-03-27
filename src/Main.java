@@ -81,8 +81,11 @@ public class Main{
 	    });
 	    order.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e){
-	    		rinda.add(vards);
-	    		JOptionPane.showMessageDialog(null, timerInfo(), "Rinda", JOptionPane.INFORMATION_MESSAGE);
+	    		JOptionPane.showMessageDialog(null,"Paldies par pasūtījumu!\nKopā: "+Piegade.aprekinaCenu()+" Eur","Informācija",JOptionPane.INFORMATION_MESSAGE);
+	    		Pica.dzestSarakstu();
+	    		Piegade.dzestPiegadesSarakstu();
+	    		jf.dispose();
+	    		Picerija(vards);
 	    	}
 	    });
 	}

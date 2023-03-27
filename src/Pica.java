@@ -84,4 +84,11 @@ public class Pica {
 		}
 		return str;
 	}
+	public static double aprekinaCenu2(double cena){
+		double rez = cena;
+		for(int i=0;i<picasSaraksts.size();i++){
+			rez += picasSaraksts.get(i).getCena();
+		}
+		return rez;
+	}
 	}
