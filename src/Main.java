@@ -55,8 +55,8 @@ public class Main{
 	    JScrollPane js2 = new JScrollPane(new JTextArea(Piegade.nolasitPiegadi()));
 	    js1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	    js2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	    Timer t = new Timer();
-	    t.schedule(timer,0,60000);
+//	    Timer t = new Timer();
+//	    t.schedule(timer,0,60000);
 	    cancel.setBounds(50, 75, 120, 25);
 	    view.setBounds(180, 75, 120, 25);
 	    order.setBounds(310, 75, 120, 25);
@@ -70,7 +70,6 @@ public class Main{
 	    	public void actionPerformed(ActionEvent e){
 	    		jf.dispose();
 	    		Picerija(vards);
-	    		return;
 	    	}
 	    });
 	    view.addActionListener(new ActionListener(){
